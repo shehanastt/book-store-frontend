@@ -1,0 +1,15 @@
+.view-book-page {
+  background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1350&q=80')
+    no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-book-page .card {
+  max-width: 900px;
+  background-color: rgba(255, 255, 255, 0.95);
+}

@@ -1,0 +1,21 @@
+.list-books .card {
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08) !important;
+  transition: transform 0.3s cubic-bezier(0.155, 1.105, 0.295, 1.12),
+              box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.list-books .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12),
+              0 4px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card-img-wrap { overflow: hidden; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+.card-img-wrap img { transition: transform 0.4s; }
+.card:hover .card-img-wrap img { transform: scale(1.1); }
+
+
+
+

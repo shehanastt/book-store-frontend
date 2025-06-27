@@ -1,0 +1,14 @@
+.home-container {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794'); /* beautiful bookshelf image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.welcome-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

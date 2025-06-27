@@ -1,0 +1,15 @@
+.register-container {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

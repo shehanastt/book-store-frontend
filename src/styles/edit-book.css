@@ -1,0 +1,12 @@
+.edit-book-page {
+  background: url('https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 40px 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.edit-book-form {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+}

@@ -1,0 +1,86 @@
+/* Seller Dashboard Aesthetic Theme */
+
+.seller-dashboard {
+  background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66')
+    no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.dashboard-body {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  min-height: 100vh;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar {
+  background: rgba(40, 40, 80, 0.8);
+  height: 100%;
+  padding: 30px 20px;
+  color: white;
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h4 {
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #f8f9fa;
+}
+
+.sidebar .nav-link {
+  color: #e0e0e0;
+  font-size: 16px;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  color: #ffc107;
+  text-decoration: none;
+  transform: translateX(5px);
+}
+
+.main-content {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h2 {
+  font-weight: bold;
+  color: #00695c;
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background-color: #20c997;
+  color: #fff;
+  border-color: #20c997;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
