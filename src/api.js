@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:'http://localhost:5000',
+    baseURL:'https://book-store-backend-cytz.onrender.com',
     timeout:5000,
 });
 
