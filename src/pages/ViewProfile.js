@@ -18,7 +18,7 @@ const ViewProfile = () => {
       .catch(err => {
         console.error(err);
       });
-  }, []);
+  }, [userData]);
 
   return (
     <div className="profile-page d-flex justify-content-center align-items-center">

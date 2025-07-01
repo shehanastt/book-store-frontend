@@ -12,7 +12,7 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: {errors, isSubmitting}, reset } = useForm({
+  const { register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
     resolver: yupResolver(schema)
   })
 
