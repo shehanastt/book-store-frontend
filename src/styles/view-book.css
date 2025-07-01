@@ -1,7 +1,9 @@
-.view-book-page {
-  background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1350&q=80')
+.wrapper{
+    background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1350&q=80')
     no-repeat center center;
-  background-size: cover;
+    background-size: cover;
+}
+.view-book-page {
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
   display: flex;

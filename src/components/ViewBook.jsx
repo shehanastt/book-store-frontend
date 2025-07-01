@@ -42,6 +42,7 @@ const ViewBook = () => {
   if (!book) return <div className="text-center mt-5">Loading...</div>;
 
   return (
+    <div class="wrapper">
     <div className="container py-5 view-book-page">
       <div className="card shadow-lg border-0 rounded-4 p-4 bg-white">
         <div className="row g-4 align-items-center">
@@ -78,6 +79,7 @@ const ViewBook = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
