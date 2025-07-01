@@ -26,7 +26,7 @@ const ViewProfile = () => {
         <h2 className="mb-4">User Profile</h2>
         <div>
           <img
-              src={user.image ? `${process.env.REACT_APP_BACKEND_URL}/${user.image}`: '/default-profile-pic.png'}
+              src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
               alt={user.title}
               className="img-fluid rounded-4"
               style={{ maxHeight: '400px', objectFit: 'cover' }}
@@ -40,7 +40,14 @@ const ViewProfile = () => {
         Edit Profile
         </Link>
         </div>
-        <button className="btn btn-outline-secondary mt-4" onClick={() => navigate(-1)}>
+        <button className="btn btn-outline-secondary mt-4" 
+        onClick={() => {
+          if (user.role === 'seller') {
+            navigate('/seller/dashboard');
+          } else {
+            navigate('/buyer/dashboard');
+          }
+        }}>
           ← Go Back
         </button>
       </div>

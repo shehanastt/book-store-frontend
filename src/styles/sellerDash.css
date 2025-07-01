@@ -59,19 +59,21 @@
   color: #00695c;
 }
 
-.btn-glass {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  color: #000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.seller-dashboard .btn-glass {
+  background: rgba(30, 30, 30, 0.8);
+  color: #f1f1f1;
+  border: 1.5px solid #000;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.btn-glass:hover {
-  background-color: #20c997;
+.seller-dashboard .btn-glass:hover {
+  background-color: #111;
   color: #fff;
-  border-color: #20c997;
+  border-color: #444;
 }
+
+
 
 .card {
   border: none;

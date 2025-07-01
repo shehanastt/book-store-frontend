@@ -1,94 +1,105 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
+import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import api from '../api'
 import '../styles/edit-profile.css';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = yup.object().shape({
+  name: yup.string().required("Name shouldn't be empty"),
+  email: yup.string().email("Invalid email format").required("email shouldn't be empty"),
+  password: yup.string().min(6, 'Password must be at least 6 characters').notRequired(),
+  image: yup
+  .mixed()
+  .test("fileSize", "File too large", (value) => {
+    if (!value || value.length === 0) return true;
+    return value[0].size <= 2 * 1024 * 1024;
+  })
+  .test("fileType", "Unsupported file format", (value) => {
+    if (!value || value.length === 0) return true;
+    return ['image/jpeg', 'image/png', 'image/jpg'].includes(value[0].type);
+  })
+})
 
 const EditProfile = () => {
-    const [user, setUser] = useState({ name: "", email: "", password: "", image: "" });
-    const [newImage, setNewImage] = useState(null);
-    // const token = localStorage.getItem('token')
-    // const userData = JSON.parse(localStorage.getItem('user'))
-    const navigate = useNavigate();
+  const [currentImage, setCurrentImage] = useState("");
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset, formState: { errors }} = useForm({
+    resolver: yupResolver(schema)
+  });
 
-    useEffect(()=>{
-        api.get('/user/viewprofile')
-        .then(res=> {
-            const { name, email, image } = res.data.data;
-            setUser({ name, email, password: "", image });
-          })
-        .catch(err => {
-            console.error(err)
-            alert("Failed to load profile");
-        })
-    },[]);
+  useEffect(() => {
+    api.get('/user/viewprofile')
+      .then(res => {
+        const { name, email, image } = res.data.data;
+        reset({ name, email });
+        setCurrentImage(image);
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Failed to load profile");
+      });
+  }, [reset]);
 
-    const handleChange = (e) => {
-        const { name, value, files} = e.target;
-        if (name === 'image') {
-            setNewImage(files[0]);
-        } else {
-            setUser(prev => ({...prev, [name]: value }));
-        }
-    };
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('email', data.email);
+    if (data.password?.trim()) {
+      formData.append('password', data.password);
+    }
+    if (data.image && data.image.length > 0) {
+      formData.append('image', data.image[0]);
+    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    try {
+      await api.patch('/user/edit/editprofile', formData);
+      alert('Profile updated successfully!');
+      navigate('/user/profile');
+    } catch (err) {
+      alert(err?.response?.data?.message || 'Something went wrong');
+    }
+  };
 
-        const formData = new FormData();
-        formData.append('name', user.name);
-        formData.append('email', user.email);
-        if (user.password.trim()) {
-          formData.append('password', user.password);
-        }
-        if (newImage) {
-          formData.append('image', newImage);
-        }
-
-        api.patch('/user/edit/editprofile',formData)
-        .then(() => {
-            alert('Profile Updated Successfully');
-            navigate('/user/profile');
-        })
-        .catch(err => {
-            console.error(err,"errrr");
-            alert(err.response.data.message)
-        });
-    };
   return (
     <div className="edit-profile-page d-flex justify-content-center align-items-center">
-      <form onSubmit={handleSubmit} className="glass-form p-4 rounded shadow-lg" encType="multipart/form-data">
+      <form onSubmit={handleSubmit(onSubmit)} className="glass-form p-4 rounded shadow-lg" encType="multipart/form-data">
         <h2 className="text-center text-white mb-4">Edit Profile</h2>
 
-        <div className="mb-4 text-center">
-          <p className="text-white"></p>
-          {user.image && (
+        {currentImage && (
+          <div className="mb-3 text-center">
             <img
-              src={`${process.env.REACT_APP_BACKEND_URL}/${user.image}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/${currentImage}`}
               alt="Current Profile"
               className="rounded-3"
               style={{ width: '150px', height: '150px', objectFit: 'cover' }}
             />
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="mb-3">
           <label className="form-label text-white">Name</label>
-          <input type="text" name="name" value={user.name} onChange={handleChange} className="form-control" required />
+          <input type="text" className="form-control" {...register('name')} />
+          <p className="text-danger">{errors.name?.message}</p>
         </div>
 
         <div className="mb-3">
           <label className="form-label text-white">Email</label>
-          <input type="email" name="email" value={user.email} onChange={handleChange} className="form-control" required />
+          <input type="email" className="form-control" {...register('email')} />
+          <p className="text-danger">{errors.email?.message}</p>
         </div>
 
         <div className="mb-3">
           <label className="form-label text-white">Password</label>
-          <input type="password" name="password" value={user.password} onChange={handleChange} className="form-control" />
+          <input type="password" className="form-control" {...register('password')} />
+          <p className="text-danger">{errors.password?.message}</p>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-3">
           <label className="form-label text-white">New Image (optional)</label>
-          <input type="file" name="image" onChange={handleChange} className="form-control" accept="image/*" />
+          <input type="file" className="form-control" accept="image/*" {...register('image')} />
+          <p className="text-danger">{errors.image?.message}</p>
         </div>
 
         <button type="submit" className="btn btn-light w-100">Update Profile</button>

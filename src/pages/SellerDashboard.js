@@ -20,7 +20,7 @@ const SellerDashboard = () => {
                 <p className="text-muted">Manage all your listings below.</p>
               </Col>
               <Col className="text-end">
-                <Button variant="outline-light" className="btn-glass" onClick={() => navigate('/add/book')}>
+                <Button className="btn-glass" onClick={() => navigate('/add/book')}>
                   Add New Book
                 </Button>
               </Col>

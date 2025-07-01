@@ -57,6 +57,8 @@ const ViewBook = () => {
             <h2 className="fw-bold mb-3">{book.title}</h2>
             <p className="mb-2"><strong>Author:</strong> {book.author}</p>
             <p className="mb-2"><strong>Price:</strong> ₹{book.price}</p>
+            <p className="mb-2"><strong>Stock:</strong> {book.stock}</p>
+            <p className="mb-2"><strong>Seller:</strong> {book.seller?.name}</p>
             {role === 'seller' && (
             <div>
               <Link to={`/books/edit/${book._id}`} className="btn btn-outline-secondary btn-sm me-2">

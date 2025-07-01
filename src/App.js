@@ -10,25 +10,79 @@ import ViewBook from "./components/ViewBook";
 import EditBook from "./components/EditBook";
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
+import PublicRoute from "./components/PublicRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  // const userData = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/list-books" element={<ListBooks/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/seller/dashboard" element={<SellerDashboard/>}/>
-        <Route path="/buyer/dashboard" element={<BuyerDashboard/>}/>
-        <Route path="/add/book" element={<AddBook/>}/>
-        <Route path="/books/view/:id" element={<ViewBook/>}/>
-        <Route path="/books/edit/:id" element={<EditBook/>}/>
-        {/* <Route path={`/user/profile/${userData._id}`} element={<ViewProfile/>}/> */}
-        <Route path="/user/profile" element={<ViewProfile/>}/>
-        <Route path="/user/profile/edit" element={<EditProfile/>}/>
+        <Route path="/" element={
+          <PublicRoute>
+            <Home/>
+          </PublicRoute>
+        } />
+
+        <Route path="/list-books" element={
+          <PrivateRoute>
+            <ListBooks/>
+            </PrivateRoute>
+          } />
+
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login/>
+          </PublicRoute>
+          } />
+
+        <Route path="/register" element={
+          <PublicRoute>
+            <Register/>
+          </PublicRoute>
+          } />
+
+        <Route path="/seller/dashboard" element={
+          <PrivateRoute>
+            <SellerDashboard/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/buyer/dashboard" element={
+          <PrivateRoute>
+            <BuyerDashboard/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/add/book" element={
+          <PrivateRoute>
+            <AddBook/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/books/view/:id" element={
+          <PrivateRoute>
+            <ViewBook/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/books/edit/:id" element={
+          <PrivateRoute>
+            <EditBook/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/user/profile" element={
+          <PrivateRoute>
+            <ViewProfile/>
+          </PrivateRoute>
+          }/>
+
+        <Route path="/user/profile/edit" element={
+          <PrivateRoute>
+            <EditProfile/>
+          </PrivateRoute>
+          }/>
       </Routes>
     </div>
   );

@@ -8,15 +8,11 @@ const ListBooks = () => {
   const [books, setBooks] = useState([]);
   // const user = JSON.parse(localStorage.getItem('user')); 
 
-
   useEffect(() => {
     api.get('/books/list')
       .then(res => setBooks(res.data.data))
       .catch(console.error);
   }, []);
-
-  
-
 
   return (
     <div>
@@ -26,7 +22,7 @@ const ListBooks = () => {
             <div key={b._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
               <div className="card h-100 shadow-sm border-0">
                 <img
-                  src={b.image ? `${process.env.REACT_APP_BACKEND_URL}/${b.image}` : '/default-book-img.jpeg'}
+                  src={`${process.env.REACT_APP_BACKEND_URL}/${b.image}`}
                   className="card-img-top p-2"
                   alt={b.title}
                   style={{ objectFit: 'contain', height: '200px' }}
