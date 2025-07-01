@@ -3,16 +3,26 @@ import { Link } from 'react-router-dom';
 import api from '../api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/card.css';
+import Pagination from './Pagination';
 
 const ListBooks = () => {
   const [books, setBooks] = useState([]);
-  // const user = JSON.parse(localStorage.getItem('user')); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalBooks, setTotalBooks] = useState(0);
+  const limit = 8; 
 
   useEffect(() => {
-    api.get('/books/list')
-      .then(res => setBooks(res.data.data))
+    api.get(`/books/list?page=${currentPage}&limit=${limit}`)
+      .then(res =>{
+        setBooks(res.data.data)
+        setTotalBooks(res.data.total);
+      }) 
       .catch(console.error);
-  }, []);
+  }, [currentPage]);
+
+   const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    };
 
   return (
     <div>
@@ -46,6 +56,15 @@ const ListBooks = () => {
             </div>
           )}
         </div>
+
+        {/* Pagination Component */}
+        <Pagination
+          currentPage={currentPage}
+          limit={limit}
+          total={totalBooks}
+          onPageChange={handlePageChange}
+        />
+        
       </div>
     </div>
   );
