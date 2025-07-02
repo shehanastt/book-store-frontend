@@ -60,6 +60,7 @@ const ViewBook = () => {
             <p className="mb-2"><strong>Price:</strong> ₹{book.price}</p>
             <p className="mb-2"><strong>Stock:</strong> {book.stock}</p>
             <p className="mb-2"><strong>Seller:</strong> {book.seller?.name}</p>
+
             {role === 'seller' && (
             <div>
               <Link to={`/books/edit/${book._id}`} className="btn btn-outline-secondary btn-sm me-2">
@@ -73,9 +74,17 @@ const ViewBook = () => {
               </button>
             </div>
             )}
-            <button className="btn btn-outline-secondary mt-4" onClick={() => navigate(-1)}>
+
+            <button className="btn btn-outline-secondary mt-4" onClick={() =>{
+              if(role === 'seller') {
+                navigate('/seller/dashboard')
+              } else {
+                navigate('/buyer/dashboard')
+              }
+              }}>
               ← Go Back
             </button>
+            
           </div>
         </div>
       </div>
